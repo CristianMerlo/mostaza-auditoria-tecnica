@@ -4,16 +4,41 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light">
+<meta name="theme-color" content="#B71C1C">
 <title>Auditoría Técnica · Mostaza</title>
-<script>window.VT_VERSION = '2.1.0';</script>
+<script>window.VT_VERSION = '2.1.1';</script>
+<style>
+/* CSS critico inline: se aplica en el primer render, antes de descargar app.css.
+   Evita el flash blanco/negro (FOUC) mientras carga la hoja de estilos real. */
+:root{--c-marca-oscuro:#B71C1C;--c-fondo:#F4F7F6}
+html{background:var(--c-fondo)}
+body{margin:0;background:var(--c-fondo);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+/* Barra superior de marca visible al instante, para que el arranque ya sea "de la marca". */
+body::before{content:"";position:fixed;top:0;left:0;right:0;height:60px;
+  background:linear-gradient(135deg,#D32F2F 0%,#B71C1C 100%);z-index:1}
+/* El contenido arranca oculto y se revela cuando el CSS real esta listo (clase vt-listo). */
+body>*{opacity:0}
+html.vt-listo body::before{display:none}
+html.vt-listo body>*{opacity:1;transition:opacity .2s ease-out}
+@media (prefers-reduced-motion:reduce){html.vt-listo body>*{transition:none}}
+</style>
 <script>
 (function () {
   var v = encodeURIComponent(window.VT_VERSION);
+  function revelar(){ document.documentElement.classList.add('vt-listo'); }
   var css = document.createElement('link');
   css.rel = 'stylesheet';
   css.href = 'css/app.css?v=' + v;
-  css.onload = function () { window.VT_CSS_LISTO = true; document.dispatchEvent(new Event('vt:css')); };
+  css.onload = function () {
+    window.VT_CSS_LISTO = true;
+    document.dispatchEvent(new Event('vt:css'));
+    revelar();
+  };
+  /* Fallback: si el CSS falla o tarda demasiado, revelamos igual para no dejar la pagina invisible. */
+  css.onerror = revelar;
   document.head.appendChild(css);
+  setTimeout(revelar, 3000);
   var archivos = [
     'js/paleta.js', 'js/config.js', 'js/storage.js', 'js/visita.js',
     'data/jefes.js', 'data/locales.js', 'data/checklist.js',
