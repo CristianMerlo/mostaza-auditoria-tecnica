@@ -15,7 +15,7 @@ window.Checklist=(function(){
   ];
   var EDILICIO=[
     {id:'edi-01',nombre:'Fachada, marquesina y acceso principal',tipo:'slider',fotos:true},
-    {id:'edi-02',nombre:'Salón comercial (Pisos, zócalos y paredes)',tipo:'slider',fotos:true},
+    {id:'edi-02',nombre:'Dinning Salón (Pisos, zócalos y paredes)',tipo:'slider',fotos:true},
     {id:'edi-02b',nombre:'Estado general de cocina',tipo:'slider',fotos:true},
     {id:'edi-03',nombre:'Cielorrasos e iluminación general del salón',tipo:'slider',fotos:true},
     {id:'edi-04',nombre:'Sistema de climatización / Aires acondicionados (Grillas y difusores)',tipo:'slider',fotos:true},

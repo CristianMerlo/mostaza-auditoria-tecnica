@@ -1,10 +1,8 @@
-
 # Arnes de verificacion: se instala a mano, no va al repo.
-# Capturas de las corridas de verificacion.
-**/.DS_Store
-.DS_Store
-.kiro/artifacts/
-.verificacion/capturas/
 .verificacion/node_modules/
-.verificacion/package-lock.json
 .verificacion/package.json
+.verificacion/package-lock.json
+.verificacion/capturas/
+
+# Capturas de las corridas de verificacion.
+.kiro/artifacts/
