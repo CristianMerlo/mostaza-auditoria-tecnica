@@ -1,0 +1,114 @@
+Gerente Regional,Coordinador de Operaciones,Local,SIGLA SISTEMA,SIGLA TICKETS,ID_Generador,Razón Social,CUIT,Estado match sábana,Estado match CUIT,Observación
+Hernán Dalto,Micaela Pardo,San Justo,FSJU,FCSJ3,002,PUESTO RICO S.A.,30714877123,Match confirmado,Match por equivalencia validada,
+Hernán Dalto,Micaela Pardo,Laferrere 2,FLF2,FLF2,003,MAZZBA S.A,30717305880,Match confirmado,Match por equivalencia validada,
+Hernán Dalto,Micaela Pardo,Ramos,FMRAM,FMRAM,004,NORAND SAS,30719143292,Match confirmado,Match exacto,
+Hernán Dalto,Micaela Pardo,Lomas Auto,FLOZ,FMLOA,046,LOMAS BURGER POINT SA,30718618912,Match confirmado,Match exacto,
+Hernán Dalto,Micaela Pardo,Lomas,FMLCA,FMLCA,047,LOMAS BURGER POINT SA,30718618912,Match confirmado,Completado desde V2+CUIT,Razón Social/CUIT completados desde V2+Detalle CUIT
+Hernán Dalto,Micaela Pardo,Lanús 2,FLA2,FMLAC,062,MUSTARD S.R.L,30717079058,Match confirmado,Match exacto,
+Hernán Dalto,Micaela Pardo,Montegrande,FMGD,FMGRA,007,DECHUNES S.R.L,30714596221,Match confirmado,Match exacto,
+Hernán Dalto,Micaela Pardo,Ezeiza,FEZE,FEZEA,005,AGOSBIAN S.R.L,30715472887,Match confirmado,Match exacto,
+Hernán Dalto,Micaela Pardo,Canning,FMCAN,FMCAN,006,FGC FUELS MARKETING S.A,33714877769,Match confirmado,Match exacto,
+Hernán Dalto,Micaela Pardo,San Juan,FSJN,FSJUA,023,ALIMENTOS DEL OESTE S.R.L,30715092197,Match confirmado,Completado desde V2+CUIT,Razón Social/CUIT completados desde V2+Detalle CUIT
+Hernán Dalto,Micaela Pardo,San Juan 2,FSJ2,FMSJ2,024,ALIMENTOS DEL OESTE S.R.L,30715092197,Match confirmado,Completado desde V2+CUIT,Razón Social/CUIT completados desde V2+Detalle CUIT
+Hernán Dalto,Micaela Pardo,La Pampa,FLPA,FROSA,064,CALDENIA GASTRONOMICA S.R.L.,30712541055,Match confirmado,Match exacto,
+Hernán Dalto,Mayra Illuminati,Gallegos,FMP1,FMDQG,075,FERNANDEZ NATALIA Y DE ZUBIZARRETA FERNANDO S.H.,30712243887,Match confirmado,Completado desde V2+CUIT,Razón Social/CUIT completados desde V2+Detalle CUIT
+Hernán Dalto,Mayra Illuminati,Aldrey,FMP2,FMDQ2,076,FERNANDEZ NATALIA Y DE ZUBIZARRETA FERNANDO S.H.,30712243887,Match confirmado,Match por equivalencia validada,
+Hernán Dalto,Mayra Illuminati,La Perla,FMD3,FMP3,077,VILLA MATILDE MDQ S.A,30717228207,Match confirmado,Match por equivalencia validada,
+Hernán Dalto,Mayra Illuminati,San Martin 2,FMDQ4,FMDQ4,078,VILLA MATILDE MDQ S.A,30717228207,Match confirmado,Match por equivalencia validada,
+Hernán Dalto,Mayra Illuminati,Olavarría,FOLAV,FOLAV,079,FERNANDEZ NATALIA Y DE ZUBIZARRETA FERNANDO S.H.,30712243887,Match confirmado,Match exacto,
+Hernán Dalto,Mayra Illuminati,Tandil,FCTA,FTAND,080,FERNANDEZ NATALIA Y DE ZUBIZARRETA FERNANDO S.H.,30712243887,Match confirmado,Match exacto,
+Hernán Dalto,Mayra Illuminati,Tandil 2,TRD2,TRD2,,,,Sin coincidencia en sábana,Pendiente de revisión,
+Hernán Dalto,Brenda Moreno,La Plata 2,FLP2,FLPCA,034,FRANUS S.A,30715181165,Match confirmado,Completado desde V2+CUIT,Razón Social/CUIT completados desde V2+Detalle CUIT
+Hernán Dalto,Brenda Moreno,La Plata 3,FLP3,FLPC3,035,GUSPABEL-SOL S.A.,30715177540,Match confirmado,Match exacto,
+Hernán Dalto,Brenda Moreno,La Plata 4,FLP4,FLPC4,036,FRANUS S.A,30715181165,Match confirmado,Match exacto,
+Hernán Dalto,Brenda Moreno,City Bell,FCYB,FMCB1,037,MEMASES S.A.,30715338870,Match confirmado,Match exacto,
+Hernán Dalto,Brenda Moreno,República,FRDN,FRPNI,038,SOBREMESA S.R.L,30715654179,Match confirmado,Match por equivalencia validada,
+Hernán Dalto,Brenda Moreno,Gonnet,FGON,FGONN,043,TEN POINTS S.A.,30716751062,Match confirmado,Match exacto,
+Hernán Dalto,Brenda Moreno,Rotonda,FMRG,FROG,045,NINE POINTS,30717387631,Match confirmado,Match por equivalencia validada,
+Hernán Dalto,Brenda Moreno,Berazategui,FBER,FMBER,044,MOSTABERA SAS,30716260271,Match confirmado,Match exacto,
+Hernán Dalto,Brenda Moreno,Wilde,FMWVP,FMWVP,048,Mitre Burguer Point SA,33718620649,Match confirmado,Match exacto,
+Hernán Dalto,Brenda Moreno,Carre Quilmes,FCQU,FCFQU,063,OCTOPUS GROUP S.A.,30715242342,Match confirmado,Match por equivalencia validada,
+Hernán Dalto,Brenda Moreno,Ushuaia,FUSH,FUSHA,050,LOGISTICA Y SERVICIOS S.R.L.,30709416991,Match confirmado,Completado desde V2+CUIT,Razón Social/CUIT completados desde V2+Detalle CUIT
+Hernán Dalto,Brenda Moreno,Río Grande,FRGD,FRGRD,051,LOGISTICA Y SERVICIOS S.R.L.,30709416991,Match confirmado,Match exacto,
+Hernán Dalto,Brenda Moreno,Río Gallegos,FRGA,,073,ANDES FOOD S.A,30711248494,Match confirmado,Completado desde V2+CUIT,Razón Social/CUIT completados desde V2+Detalle CUIT
+Hernán Dalto,Fabrizio Bollero,Portal Salta,FPSA,FTART,052,GASTRONOMIA SAN FRANCISCO S.R.L,30714021709,Match confirmado,Match exacto,
+Hernán Dalto,Fabrizio Bollero,Salta Libertad,FSLI,FSLIB,053,ZONSUR S.R.L,30715304003,Match confirmado,Match exacto,
+Hernán Dalto,Fabrizio Bollero,Salta Peatonal,FSVP,FSAL4,054,LIBERTAD OPERACIONES  S.A,33717869279,Match confirmado,Completado desde V2+CUIT,Razón Social/CUIT completados desde V2+Detalle CUIT
+Hernán Dalto,Fabrizio Bollero,Salta Auto,FSAA,FMSAA,055,SABADI SRL,33717677019,Match confirmado,Match exacto,
+Hernán Dalto,Fabrizio Bollero,Jujuy,FJUJ,FJUJY,057,CANDELIA S.R.L.,30711115931,Match confirmado,Match por equivalencia validada,
+Hernán Dalto,Fabrizio Bollero,Salta Orán,FSAO,FSAO,058,ZENTA FOOD,30717322475,Match confirmado,Match por equivalencia validada,
+Hernán Dalto,Fabrizio Bollero,Salta Auto 2,FMSAA,FMSAA,,,,Sin coincidencia en sábana,Pendiente de revisión,
+Hernán Dalto,Fabrizio Bollero,Jujuy 2,FJUJ,FJUJ,,,,Sin coincidencia en sábana,Pendiente de revisión,
+Cecilia Riccadonna,Aylen Crespin,Constitución,FMCNT,FMCNT,060,MAYONESA S.R.L,30718302915,Match confirmado,Match exacto,
+Cecilia Riccadonna,Aylen Crespin,Pompeya,FMPYA,FMPYA,074,EXPANSION DRF S.R.L.,33718036939,Match confirmado,Match exacto,
+Cecilia Riccadonna,Aylen Crespin,Terrada,FMTER,FMRYT,070,SINERGIA SAS,33719236109,Match confirmado,Match exacto,SIGLA SISTEMA completada desde V2; SIGLA TICKETS completada desde V2
+Cecilia Riccadonna,Aylen Crespin,Flores,FFLO,FFLOR,066,MAGRETA S.A.,30715640321,Match confirmado,Match por equivalencia validada,
+Cecilia Riccadonna,Aylen Crespin,Primera Junta,FMPRI,FMPRI,067,BIG B POINTS S.A,33717603139,Match confirmado,Match exacto,
+Cecilia Riccadonna,Aylen Crespin,Once,FMONC,FMONC,069,EVOLUCION DRF S.R.L,30718537084,Match confirmado,Match exacto,
+Cecilia Riccadonna,Aylen Crespin,Cabildo,FCAB,FCABI,010,MTZ CABILDO SAS,30716536048,Match confirmado,Match exacto,
+Cecilia Riccadonna,Aylen Crespin,Cabildo 2,FMCYM,FMCYM,011,MTZ CABILDO SAS,30716536048,Match confirmado,Completado desde V2+CUIT,Razón Social/CUIT completados desde V2+Detalle CUIT
+Cecilia Riccadonna,Aylen Crespin,Spinetto,FSPI,FSPIN,061,ROS GROUP S.R.L,30711035903,Match confirmado,Match exacto,
+Cecilia Riccadonna,Aylen Crespin,Bolívar,FBOL,FMBLV,071,COMERCIAL BOLIVAR S.A.,33716882999,Match confirmado,Match exacto,
+Cecilia Riccadonna,Aylen Crespin,Junín,FMJUN,FMJUN,072,COMERCIAL BOLIVAR S.A.,33716882999,Match confirmado,Match exacto,
+Cecilia Riccadonna,Aylen Crespin,Formosa,FMFOR,FMFOR,065,IDAVE SRL,30718047206,Match confirmado,Match exacto,
+Cecilia Riccadonna,Ailen Perez,Tucumán 2,FTU2,FMTCM,025,GASTRONOMIA MODERNA S.R.L,30714772275,Match confirmado,Completado desde V2+CUIT,Razón Social/CUIT completados desde V2+Detalle CUIT
+Cecilia Riccadonna,Ailen Perez,Tucumán 3,FTU3,FMTM2,026,DRAS S.R.L,30715684663,Match confirmado,Completado desde V2+CUIT,Razón Social/CUIT completados desde V2+Detalle CUIT
+Cecilia Riccadonna,Ailen Perez,Tucumán 4,FTU4,FMTU4,027,ZONSUR S.R.L,30715304003,Match confirmado,Completado desde V2+CUIT,Razón Social/CUIT completados desde V2+Detalle CUIT
+Cecilia Riccadonna,Ailen Perez,Tucumán 5,FTC5,FTC5,028,FELMOR GROUP SAS,30717139859,Match confirmado,Completado desde V2+CUIT,Razón Social/CUIT completados desde V2+Detalle CUIT
+Cecilia Riccadonna,Ailen Perez,Tucumán 6,FTC6,FMTU6,029,REDFOOD SRL,30717338436,Match confirmado,Completado desde V2+CUIT,Razón Social/CUIT completados desde V2+Detalle CUIT
+Cecilia Riccadonna,Ailen Perez,Tucumán 7,FMTU7,FMTU7,030,GOLDENSIDE S.R.L,30717725200,Match confirmado,Completado desde V2+CUIT,Razón Social/CUIT completados desde V2+Detalle CUIT
+Cecilia Riccadonna,Ailen Perez,Tucumán 8,FTC8,FMTC8,031,PUNTO 24,30718488024,Match confirmado,Completado desde V2+CUIT,Razón Social/CUIT completados desde V2+Detalle CUIT
+Cecilia Riccadonna,Ailen Perez,Tucumán 9,FMTU9,FMTU9,033,MILON SAS,30718640462,Match confirmado,Completado desde V2+CUIT,Razón Social/CUIT completados desde V2+Detalle CUIT
+Cecilia Riccadonna,Ailen Perez,Portal Tucumán,MPT,MPT,032,Propios,30714021709,Match confirmado,Completado desde V2+CUIT,Razón Social/CUIT completados desde V2+Detalle CUIT
+Cecilia Riccadonna,Ailen Perez,S. del Estero,FSDE,FSANT,039,GASTRONOMIA MODERNA S.R.L,30714772275,Match confirmado,Completado desde V2+CUIT,Razón Social/CUIT completados desde V2+Detalle CUIT
+Cecilia Riccadonna,Paula Martinez,Luján,FLUJ,FLUJA,020,CLONI S.A,33718034499,Match confirmado,Match exacto,
+Cecilia Riccadonna,Paula Martinez,F. Álvarez,FFRA,FFRA,018,EL SEÑUELO SAS,30716043505,Match confirmado,Match por equivalencia validada,
+Cecilia Riccadonna,Paula Martinez,Merlo,FMER,FMERL,086,BARSI FOOD S.A,30715843508,Match confirmado,Match exacto,
+Cecilia Riccadonna,Paula Martinez,Morón,,,,GRUPO AGL,30719401240,Sin coincidencia en sábana,Match exacto,
+Cecilia Riccadonna,Paula Martinez,Liniers,FLIN,FLINR,068,PARADOR 71 S.R.L,30715203649,Match confirmado,Match por equivalencia validada,
+Cecilia Riccadonna,Paula Martinez,San Miguel 3,FSM2,FMSM3,084,JULUSA,30719028159,Match confirmado,Completado desde V2+CUIT,Razón Social/CUIT completados desde V2+Detalle CUIT
+Cecilia Riccadonna,Paula Martinez,San Miguel A.,FMSMA,FMSMA,085,JULUSA,30719028159,Match confirmado,Completado desde V2+CUIT,Razón Social/CUIT completados desde V2+Detalle CUIT
+Cecilia Riccadonna,Paula Martinez,San Fernando,FSAF,FSAF,081,L.C TRESEM  S.R.L,30716041294,Match confirmado,Match exacto,
+Cecilia Riccadonna,Paula Martinez,Moreno,FMORE,FMMRE,019,EL SEÑUELO SAS,30716043505,Match confirmado,Match exacto,
+Cecilia Riccadonna,Paula Martinez,Corrientes,FCOR,FMCOR,087,CUANTODEJA SRL,30717516903,Match confirmado,Completado desde V2+CUIT,Razón Social/CUIT completados desde V2+Detalle CUIT
+Cecilia Riccadonna,Paula Martinez,Resistencia,FMRES,FMRES,088,GASTRONOMIA MODERNA S.R.L,30714772275,Match confirmado,Match exacto,
+Cecilia Riccadonna,Paula Martinez,San Luis,FSLS,FMSLI,089,GRUPO KRAN S. A. S.,30719276535,Match confirmado,Completado desde V2+CUIT,Razón Social/CUIT completados desde V2+Detalle CUIT
+Melisa Castillo,Iris Ayala,Villa del Parque,FVDP,FVDP,001,TRESOL,30718977394,Match confirmado,Match exacto,
+Melisa Castillo,Iris Ayala,Caseros,FMMCB,FMMCB,,TRESOL,30718977394,Sin coincidencia en sábana,Match exacto,
+Melisa Castillo,Iris Ayala,San Martín 2,FMSVP,FMSVP,021,LIBERTAD OPERACIONES  S.A,33717869279,Match confirmado,Completado desde V2+CUIT,Razón Social/CUIT completados desde V2+Detalle CUIT
+Melisa Castillo,Iris Ayala,San Martín Auto,FSMA,F3DF,022,LOS INVENCIBLES S.A,30717060233,Match confirmado,Completado desde V2+CUIT,Razón Social/CUIT completados desde V2+Detalle CUIT
+Melisa Castillo,Iris Ayala,San Isidro,FSIS,FMSIS,015,BARSI FOOD S.A,30715843508,Match confirmado,Match exacto,
+Melisa Castillo,Iris Ayala,Grand Bourg,FGBG,FGRBG,082,ZVEZA S.R.L,30716736020,Match confirmado,Match exacto,
+Melisa Castillo,Iris Ayala,José C. Paz,FJCP,FMJCP,083,BURGERBUS S.A.,30715665464,Match confirmado,Match exacto,
+Melisa Castillo,Iris Ayala,Zárate,FZAR,FMZAR,008,LYSON,30717872076,Match confirmado,Match exacto,
+Melisa Castillo,Iris Ayala,Palmas Pilar,FPPI,FPMPI,014,AYAM MARCELO ROBERTO,23254355879,Match confirmado,Match por equivalencia validada,
+Melisa Castillo,Iris Ayala,La Rioja,FMRVP,FMRVP,016,ARLEQUINO SRL,30711911509,Match confirmado,Match exacto,
+Melisa Castillo,Iris Ayala,Catamarca,FCAT,FMCAT,017,CORCAN S.R.L,30716741245,Match confirmado,Match exacto,
+Melisa Castillo,Iris Ayala,Gualeguaychú,FMGUA,FMGUA,009,MOSTAZA GUALEGUAYCHU SRL,30719250595,Match confirmado,Match exacto,
+Melisa Castillo,Camilo Silva,Parque Chac,FPCH,FMPCH,059,EZIO S.A,30717196607,Match confirmado,Match por equivalencia validada,
+Melisa Castillo,Camilo Silva,Boedo,FBOE,FMBOE,090,BOEDO GOURMET SRL,33717012459,Match confirmado,Match exacto,
+Melisa Castillo,Camilo Silva,San Telmo,FSTM,FMSTO,091,ROSDA S.R.L,30715942190,Match confirmado,Match por equivalencia validada,
+Melisa Castillo,Camilo Silva,Av. de Mayo,FAVM,FAMAY,092,TREVAGO S.A.,30712489959,Match confirmado,Match exacto,
+Melisa Castillo,Camilo Silva,Av. de Mayo 2,FAVM2,FAMA2,093,TREVAGO S.A.,30712489959,Match confirmado,Match exacto,
+Melisa Castillo,Camilo Silva,9 de Julio,F9DJ,FM9JU,094,L&A BURGER,30716568764,Match confirmado,Match por equivalencia validada,
+Melisa Castillo,Camilo Silva,Callao,FMCYC,FMCYC,095,CUANTODEJA SRL,30717516903,Match confirmado,Completado desde V2+CUIT,Razón Social/CUIT completados desde V2+Detalle CUIT
+Melisa Castillo,Camilo Silva,Av. Córdoba,,,,,,Sin coincidencia en sábana,Pendiente de revisión,
+Melisa Castillo,Camilo Silva,Urquiza,FURQ,FMURQ,013,LOS INVENCIBLES S.A,30717060233,Match confirmado,Completado desde V2+CUIT,Razón Social/CUIT completados desde V2+Detalle CUIT
+Melisa Castillo,Camilo Silva,Ribera Santa Fe,FRSF,FSFER,097,OPERADOR RIBERA S.R.L,30716271494,Match confirmado,Match por equivalencia validada,
+Melisa Castillo,Camilo Silva,Walmart Sta. Fe,FWSF,FSFEW,098,IMEGA S.R.L,30711454418,Match confirmado,Match por equivalencia validada,
+Melisa Castillo,Camilo Silva,Santa Fe P.,FMSFV,FMSFV,099,LIBERTAD OPERACIONES  S.A,33717869279,Match confirmado,Match por equivalencia validada,
+Melisa Castillo,Camilo Silva,Rafaela,FRAF,FRAFA,096,IMPRUV S.A.,30711967407,Match confirmado,Match exacto,
+Melisa Castillo,Elisabet Gassman,Portal Rosario,FPRO,FPROS,100,IMEGA S.R.L,30711454418,Match confirmado,Match por equivalencia validada,
+Melisa Castillo,Elisabet Gassman,Pellegrini,FPEL,FMROS,101,PELLEGRINI BEST FOOD S.A,30716942410,Match confirmado,Match exacto,
+Melisa Castillo,Elisabet Gassman,Rosario Sur,FRSM,FRSM,102,GAMISUR S.A,30717263584,Match confirmado,Match exacto,
+Melisa Castillo,Elisabet Gassman,Oroño,FROA,FORO,103,MADILAGA S.A.,30716709589,Match confirmado,Match exacto,
+Melisa Castillo,Elisabet Gassman,San Nicolás,FMSNI,FMSNI,104,PUA NANI S.R.L,33718090739,Match confirmado,Match exacto,
+Melisa Castillo,Elisabet Gassman,Puma,FMPUM,FMPUM,105,FGC FUELS MARKETING S.A,33714877769,Match confirmado,Match exacto,
+Melisa Castillo,Elisabet Gassman,Funes,FMFUN,FMFUN,106,ALADOS SA,30717092941,Match confirmado,Match exacto,Corrección: SIGLA SISTEMA FMPUM->FMFUN (era duplicada de Puma)
+Melisa Castillo,Elisabet Gassman,Alto Rosario,MAR,MAR,107,Propios,30711454418,Match confirmado,Completado desde V2+CUIT,Razón Social/CUIT completados desde V2+Detalle CUIT
+Melisa Castillo,Elisabet Gassman,City Center,MCR,MCR,108,Propios,,Match confirmado,Pendiente de revisión,
+,,Güemes,FGUE,FGUE,012,LOS INVENCIBLES S.A,30717060233,Pendiente de asignar regional/coordinador,Match exacto,Local operativo EN OBSERVACIÓN: sin regional/coordinador hasta definición
+Darío D.,Agustina Grigas,Mendoza Centro,FMMSM,FMMSM,040,ALIMENTOS DEL OESTE S.R.L,30715092197,Pendiente de asignar regional/coordinador,Completado desde V2+CUIT,Razón Social/CUIT completados desde V2+Detalle CUIT; Regional Darío D. / Coord. Agustina Grigas (otra región)
+Darío D.,Agustina Grigas,Mendoza Colón,FMMCO,FMMCO,041,ALIMENTOS DEL OESTE S.R.L,30715092197,Pendiente de asignar regional/coordinador,Match exacto,Regional Darío D. / Coord. Agustina Grigas (otra región)
+Darío D.,Agustina Grigas,San Rafael,FSRM,FSRM,042,FARTRES MDZ S.A,30717266427,Pendiente de asignar regional/coordinador,Match exacto,Regional Darío D. / Coord. Agustina Grigas (otra región)
+,,Bariloche,FBA1,FMBRC,049,BURIEL GASTRONOMICA S.A.,30715567608,Pendiente de asignar regional/coordinador,Match exacto,Huérfano: sin regional/coordinador hasta definición (decisión P)

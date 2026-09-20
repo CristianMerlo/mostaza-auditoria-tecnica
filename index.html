@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>Visita Técnica</title>
+<script>window.VT_VERSION = '2.0.0';</script>
+<script>
+(function () {
+  var v = encodeURIComponent(window.VT_VERSION);
+  var css = document.createElement('link');
+  css.rel = 'stylesheet';
+  css.href = 'css/app.css?v=' + v;
+  css.onload = function () { window.VT_CSS_LISTO = true; document.dispatchEvent(new Event('vt:css')); };
+  document.head.appendChild(css);
+  var archivos = [
+    'js/paleta.js', 'js/config.js', 'js/storage.js', 'js/visita.js',
+    'data/jefes.js', 'data/locales.js', 'data/checklist.js',
+    'js/controles/registro.js', 'js/controles/slider.js', 'js/controles/checklist.js',
+    'js/controles/texto.js', 'js/controles/escala.js', 'js/controles/info.js', 'js/controles/agua.js',
+    'js/scoring.js', 'js/fotos.js', 'js/firmas.js', 'js/pdf.js',
+    'js/diagnostico.js', 'js/ui.js',
+    'js/paneles/identificacion.js', 'js/paneles/local.js', 'js/paneles/recorrido.js',
+    'js/paneles/firmas.js', 'js/paneles/informe.js',
+    'vendor/jspdf.umd.min.js',
+    'js/app.js'
+  ];
+  archivos.forEach(function (src) {
+    var s = document.createElement('script');
+    s.src = src + '?v=' + v; s.async = false;
+    document.head.appendChild(s);
+  });
+})();
+</script>
+</head>
+<body>
+<header class="cabecera">
+  <span class="logo-m" aria-hidden="true">M</span>
+  <div class="cabecera__texto">
+    <strong class="cabecera__titulo">Visita Técnica</strong>
+    <span class="cabecera__contexto" id="cab-contexto">Sin visita iniciada</span>
+  </div>
+  <span class="semaforo semaforo--oculto" id="cab-semaforo" aria-hidden="true"></span>
+</header>
+<div class="aviso aviso--oculto" id="aviso-almacenamiento" role="alert"></div>
+<main class="panel" id="panel" tabindex="-1"></main>
+<footer class="pie">
+  <span class="pie__texto">Mostaza — Control Interno Regional</span>
+  <button type="button" class="pie__version" id="btn-version">v—</button>
+</footer>
+<nav class="barra" id="barra">
+  <button type="button" class="barra__btn" id="btn-atras">Atrás</button>
+  <span class="barra__progreso" id="barra-progreso">Paso 1 de 6</span>
+  <button type="button" class="barra__btn barra__btn--principal" id="btn-siguiente">Siguiente</button>
+</nav>
+<div class="modal modal--oculto" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
+  <div class="modal__caja" id="modal-caja"></div>
+</div>
+<noscript><p style="padding:16px;font-family:sans-serif">Esta aplicación necesita JavaScript activado.</p></noscript>
+</body>
+</html>
