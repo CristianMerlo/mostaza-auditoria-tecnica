@@ -7,10 +7,10 @@ window.CONFIG=(function(){
     umbrales:{rojo:60,verde:80},
     pesosBloques:{cocina:0.5,edilicio:0.5},
     sliderDefault:100, umbralFoto:70,
-    umbralFotoObligatoria:60, fotosMinObligatorias:2,
+    umbralFotoObligatoria:60, fotosMinObligatorias:1,
     fotos:{
       maxLadoLargo:1200, calidad:0.65,
-      maxPorItem:2,
+      maxPorItem:1,
       maxPorItemEdilicio:4,
       maxPorVisita:20,
       anchoEnPdfPx:800, porFilaEnPdf:2

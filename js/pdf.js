@@ -57,7 +57,8 @@ window.PDF=(function(){
     if(v.local){ if(v.local.siglaSistema)dato('Sigla sistema',v.local.siglaSistema);
       if(v.local.siglaTicket)dato('Sigla ticket',v.local.siglaTicket);
       if(v.local.provincia)dato('Provincia',v.local.provincia);
-      dato('Tipo',v.local.tipo+(v.local.manual?' (carga manual)':'')); }
+      dato('Tipo',v.local.tipo+(v.local.manual?' (carga manual)':''));
+      if(v.localFormato)dato('Formato',v.localFormato); }
     dato('Fecha',fechaCorta(v.iniciada));
     dato('Jefe de área',v.jefe?v.jefe.nombre:'—');
     dato('Encargado',v.encargado.nombre+(v.encargado.cargo?' — '+v.encargado.cargo:''));
@@ -73,14 +74,18 @@ window.PDF=(function(){
     y+=2;
     function bloque(nombre,clave){
       titulo('Bloque '+nombre);
-      var items=window.Checklist.porBloque(clave);
+      var items=window.Checklist.visibles(clave,v.localFormato);
       var revisados=0,total=0;
       items.forEach(function(it){ if(it.tipo==='agua')return; var d=v.items[it.id]; if(!d)return; total++;
         if((d.declarado||d.tocado)&&!d.na)revisados++; });
       var sc=v.scores[clave];
       dato('Puntaje del bloque',(sc==null?'sin datos':sc+'/100')+'  ('+({verde:'VERDE',amarillo:'AMARILLO',rojo:'ROJO',gris:'—'})[window.Scoring.color(sc)]+')');
       parrafo('Revisados sin observaciones: '+revisados+' de '+total,9); y+=1;
-      items.forEach(function(it){ var d=v.items[it.id]||window.Controles.inicial(it);
+      var ultSector=null;
+      items.forEach(function(it){ if(it.sector&&it.sector!==ultSector){ultSector=it.sector;
+          espacio(8); doc.setFont('helvetica','bold'); doc.setFontSize(8.5); doc.setTextColor(cLabel[0],cLabel[1],cLabel[2]);
+          doc.text('SECTOR: '+String(it.sector).toUpperCase(),mx,y); y+=5.5; }
+        var d=v.items[it.id]||window.Controles.inicial(it);
         var c=window.Controles.obtener(it.tipo); var r=c.aPdf?c.aPdf(it,d):{lineas:[]};
         espacio(10);
         doc.setFont('helvetica','bold'); doc.setFontSize(10); doc.setTextColor(cTinta[0],cTinta[1],cTinta[2]);

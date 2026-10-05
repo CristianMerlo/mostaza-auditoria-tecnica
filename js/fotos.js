@@ -63,7 +63,7 @@ window.Fotos=(function(){
     var critico=(typeof d.valor==='number' && d.valor<window.CONFIG.umbralFotoObligatoria && !d.na);
     if(critico && (d.fotos||[]).length<window.CONFIG.fotosMinObligatorias){
       var w=document.createElement('p');w.className='error';
-      w.textContent='Puntaje crítico (<'+window.CONFIG.umbralFotoObligatoria+'): cargá al menos '+window.CONFIG.fotosMinObligatorias+' fotos para poder avanzar.';
+      w.textContent='Puntaje crítico: sacá al menos 1 foto para documentar el problema.';
       cont.appendChild(w);
     }
     var puedeMas=(d.fotos||[]).length<tope;

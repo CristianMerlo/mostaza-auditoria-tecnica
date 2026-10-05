@@ -40,7 +40,13 @@
     var vol=document.createElement('button');vol.type='button';vol.className='btn btn--bloque';vol.textContent='Volver al buscador';
     vol.addEventListener('click',function(){modoManual=false;mensaje='';window.UI.render();});t.appendChild(vol);
   }
+  var FORMATOS=['','A LA CALLE','AUTO / DRIVE THRU','SHOPPING','FOOD TRUCK / OTRO'];
+  function detectarFormato(l){var n='';try{n=String(l&&l.nombre||'').toUpperCase();}catch(e){n='';}
+    if(/AUTO|DRIVE/.test(n))return 'AUTO / DRIVE THRU';
+    if(/SHOPPING|MALL|PORTAL|PASEO|GALERIAS|UNICENTER|CENTRO|CITY CENTER|BARRACAS|JOCKEY|DOT|NINE|TORTUGUITA|FOOD|ALTO/.test(n))return 'SHOPPING';
+    return 'A LA CALLE';}
   function elegir(local){window.Visita.aplicar(function(v){v.local=local;
+    v.localFormato=detectarFormato(local);
     var cods=generarCodigos(v,local); v.codigo=cods.legible; v.codigoValidacion=cods.validacion;
   },'local'); modoManual=false;busqueda='';window.UI.render();}
   function normalizarNombre(n){var s=String(n||'').toUpperCase();
@@ -60,6 +66,15 @@
     t.appendChild(dato('Sigla de ticket',l.siglaTicket||'no figura en el padrón'));
     if(l.provincia)t.appendChild(dato('Provincia',l.provincia));
     t.appendChild(dato('Tipo',l.tipo+(l.manual?' · cargado a mano':'')));
+    // Formato y superficie: condicionan ítems del checklist y la nota de duración del informe
+    t.appendChild(etq('Formato del local'));
+    var fp=document.createElement('p');fp.className='item__ayuda';
+    fp.textContent='Se detectó automáticamente del nombre. Corregilo si no corresponde: define si corresponde marcar Marquesina y Careta de torre.';t.appendChild(fp);
+    var selF=document.createElement('select');selF.className='campo';
+    FORMATOS.forEach(function(o){var op=document.createElement('option');op.value=o;op.textContent=o||'— sin especificar —';selF.appendChild(op);});
+    selF.value=v.localFormato||detectarFormato(l);
+    selF.addEventListener('change',function(){window.Visita.set('localFormato',selF.value);});
+    t.appendChild(selF);
     t.appendChild(dato('Código de informe',v.codigo||'—'));
     t.appendChild(dato('Código de validación',v.codigoValidacion||'—'));
     t.appendChild(etq('Tickets abiertos del local (opcional)'));
