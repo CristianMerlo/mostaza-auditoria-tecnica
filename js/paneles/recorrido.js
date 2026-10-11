@@ -23,16 +23,8 @@
         });
       },
       puedeAvanzar:function(v){
-        var items=window.Checklist.visibles(bloque,v.localFormato);
-        for(var i=0;i<items.length;i++){var it=items[i],d=v.items[it.id];
-          if(!d)continue;
-          if(d.na&&!String(d.motivoNa||'').trim())
-            return 'El ítem "'+it.nombre+'" está en No aplica sin motivo. Escribí el motivo.';
-          if(it.fotos && !d.na && typeof d.valor==='number' && d.valor<window.CONFIG.umbralFotoObligatoria){
-            if(window.Fotos.fotosDe(d)<window.CONFIG.fotosMinObligatorias)
-              return 'El ítem "'+it.nombre+'" está en puntaje crítico. Sacá al menos 1 foto (opcional si no está mal).';
-          }
-        }
+        // V2.4.0 (Cristian 07/10): recorrido libre, sin bloqueos de avance.
+        // Los avisos (foto en críticos, fechas obligatorias) siguen visibles en pantalla, pero no impiden pasar de página.
         return true;
       }
     };
@@ -42,13 +34,17 @@
     var titulo=bloque==='cocina'?'Recorrido de cocina':'Recorrido edilicio';
     t.appendChild(etq(bloque==='cocina'?'Paso 3':'Paso 4'));
     var h=document.createElement('h2');h.className='tarjeta__titulo';h.textContent=titulo;t.appendChild(h);
-    var puntuables=items.filter(function(it){return it.tipo!=='agua';});
-    var tocados=0,na=0;
-    puntuables.forEach(function(it){var d=v.items[it.id];if(!d)return;if(d.na)na++;else if(d.tocado)tocados++;});
+    var puntuables=items.filter(function(it){return it.tipo!=='agua'&&it.tipo!=='texto';});
+    var tocados=0,na=0,conObs=0;
+    puntuables.forEach(function(it){var d=v.items[it.id];if(!d)return;
+      if(d.na)na++;else{if(d.tocado)tocados++;
+        var c=window.Controles.obtener(it.tipo);
+        var txt=c.observaciones?c.observaciones(it,d):String(d.obs||'');
+        if(String(txt).trim())conObs++;}});
     var pend=puntuables.length-tocados-na;
     var p=document.createElement('p');p.className='tarjeta__texto';
-    p.textContent='Todos arrancan en 100. Ajustá solo lo que esté mal. Ajustados: '+tocados+
-      ' · N/A: '+na+' · en 100: '+pend+'. Fotos opcionales, salvo ítems críticos (<'+window.CONFIG.umbralFotoObligatoria+') que piden al menos 1.';
+    p.textContent='Todos arrancan en 100. Ajustá solo lo que esté mal. Ajustados: '+tocados+' · con observaciones: '+conObs+
+      ' · N/A: '+na+' · en 100: '+pend+'. Fotos opcionales (servían también para documentar aunque esté todo OK), salvo ítems críticos (<'+window.CONFIG.umbralFotoObligatoria+') que piden al menos 1.';
     t.appendChild(p);
     var sc=window.Scoring.promedioBloque(v,bloque);
     var barra=document.createElement('div');barra.className='progreso-bloque';

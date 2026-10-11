@@ -75,12 +75,15 @@ window.PDF=(function(){
     function bloque(nombre,clave){
       titulo('Bloque '+nombre);
       var items=window.Checklist.visibles(clave,v.localFormato);
-      var revisados=0,total=0;
-      items.forEach(function(it){ if(it.tipo==='agua')return; var d=v.items[it.id]; if(!d)return; total++;
-        if((d.declarado||d.tocado)&&!d.na)revisados++; });
+      var revisados=0,conObs=0,total=0;
+      items.forEach(function(it){ if(it.tipo==='agua'||it.tipo==='texto')return; var d=v.items[it.id]; if(!d)return; total++;
+        if(!d.na){ if(d.declarado||d.tocado)revisados++;
+          var cc=window.Controles.obtener(it.tipo);
+          var tx=cc.observaciones?cc.observaciones(it,d):String(d.obs||'');
+          if(tx.trim())conObs++; } });
       var sc=v.scores[clave];
       dato('Puntaje del bloque',(sc==null?'sin datos':sc+'/100')+'  ('+({verde:'VERDE',amarillo:'AMARILLO',rojo:'ROJO',gris:'—'})[window.Scoring.color(sc)]+')');
-      parrafo('Revisados sin observaciones: '+revisados+' de '+total,9); y+=1;
+      parrafo('Ítems revisados: '+revisados+' de '+total+' · con observaciones: '+conObs,9); y+=1;
       var ultSector=null;
       items.forEach(function(it){ if(it.sector&&it.sector!==ultSector){ultSector=it.sector;
           espacio(8); doc.setFont('helvetica','bold'); doc.setFontSize(8.5); doc.setTextColor(cLabel[0],cLabel[1],cLabel[2]);
@@ -127,10 +130,12 @@ window.PDF=(function(){
     barra('Cocina',v.scores.cocina); barra('Edilicio',v.scores.edilicio); barra('General',v.scores.general); y+=2;
     titulo('Resumen para plan de acción');
     var criticos=[];
-    window.Checklist.todos().forEach(function(it){ if(it.tipo==='agua')return;
+    window.Checklist.todos().forEach(function(it){ if(it.tipo==='agua'||it.tipo==='texto')return;
       var d=v.items[it.id]; if(!d||d.na)return;
-      if(typeof d.valor==='number' && d.valor<window.CONFIG.umbralFoto)
-        criticos.push({nombre:it.nombre,valor:d.valor,obs:d.obs||''}); });
+      var pv=window.Scoring.puntajeItem(it,d);
+      if(typeof pv==='number' && pv<window.CONFIG.umbralFoto){
+        var cb=window.Controles.obtener(it.tipo);
+        criticos.push({nombre:it.nombre,valor:pv,obs:(cb.observaciones?cb.observaciones(it,d):d.obs)||''}); } });
     criticos.sort(function(a,b){return a.valor-b.valor;});
     if(dAgua.semaforo==='rojo'||dAgua.semaforo==='naranja')
       criticos.push({nombre:'Sistema de filtrado de agua',valor:'('+rotAgua(dAgua.semaforo)+')',obs:dAgua.porQue||''});

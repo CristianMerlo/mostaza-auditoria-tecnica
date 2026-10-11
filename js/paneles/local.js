@@ -66,10 +66,10 @@
     t.appendChild(dato('Sigla de ticket',l.siglaTicket||'no figura en el padrón'));
     if(l.provincia)t.appendChild(dato('Provincia',l.provincia));
     t.appendChild(dato('Tipo',l.tipo+(l.manual?' · cargado a mano':'')));
-    // Formato y superficie: condicionan ítems del checklist y la nota de duración del informe
+    // Formato: contexto del local (calle/auto/shopping), luce en el informe
     t.appendChild(etq('Formato del local'));
     var fp=document.createElement('p');fp.className='item__ayuda';
-    fp.textContent='Se detectó automáticamente del nombre. Corregilo si no corresponde: define si corresponde marcar Marquesina y Careta de torre.';t.appendChild(fp);
+    fp.textContent='Se detectó automáticamente del nombre. Corregilo si no corresponde; sale en el informe y sirve para leer el relevamiento.';t.appendChild(fp);
     var selF=document.createElement('select');selF.className='campo';
     FORMATOS.forEach(function(o){var op=document.createElement('option');op.value=o;op.textContent=o||'— sin especificar —';selF.appendChild(op);});
     selF.value=v.localFormato||detectarFormato(l);

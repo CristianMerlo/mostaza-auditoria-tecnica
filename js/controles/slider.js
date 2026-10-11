@@ -5,9 +5,11 @@
   function inicial(item){return {tipo:'slider',valor:CFG.sliderDefault,tocado:false,declarado:false,
     obs:'',na:false,motivoNa:'',fotos:item.fotos?[]:undefined};}
   function claseColor(v){if(v<CFG.umbrales.rojo)return 'rojo';if(v<=CFG.umbrales.verde)return 'amarillo';return 'verde';}
+  // Semáforo de la barra: verde≥80 · amarillo 60-79 · naranja 40-59 · rojo <40
+  function claseSemaforo(v){if(v<40)return 'rojo';if(v<60)return 'naranja';if(v<80)return 'amarillo';return 'verde';}
   function render(item,d,alCambiar){
     var abierto=!!desbloqueados[item.id];
-    var t=document.createElement('div'); t.className='tarjeta'+(d.na?' tarjeta--na':'');
+    var t=document.createElement('div'); t.className='tarjeta'+(d.na?' tarjeta--na':'')+(abierto&&!d.na?' tarjeta--activo':'');
     var cab=document.createElement('div'); cab.className='item__cabecera';
     var h=document.createElement('h3'); h.className='tarjeta__titulo'; h.textContent=item.nombre; h.style.margin='0';
     var val=document.createElement('span'); val.className='item__valor item__valor--'+(d.na?'gris':claseColor(d.valor));
@@ -16,10 +18,11 @@
     var pintarFoto=function(){};
     if(!d.na){
       var s=document.createElement('input'); s.type='range'; s.min='0'; s.max='100'; s.step='1';
-      s.value=d.valor; s.className='slider'; s.setAttribute('aria-label',item.nombre);
+      s.value=d.valor; s.className='slider slider--'+claseSemaforo(d.valor); s.setAttribute('aria-label',item.nombre);
       s.disabled=!abierto; s.style.opacity=abierto?'1':'0.5';
       s.addEventListener('input',function(){ d.valor=parseInt(s.value,10); d.tocado=true; d.declarado=false;
         val.textContent=d.valor; val.className='item__valor item__valor--'+claseColor(d.valor);
+        s.className='slider slider--'+claseSemaforo(d.valor);
         alCambiar(d,{soloValor:true}); pintarFoto(); });
       t.appendChild(s);
       var btn=document.createElement('button'); btn.type='button'; btn.className='btn btn--bloque'+(abierto?' btn--principal':'');
@@ -35,7 +38,7 @@
       obs.addEventListener('input',function(){ if(obs.readOnly)return; d.obs=obs.value; alCambiar(d,{}); });
       t.appendChild(obs);
       if(item.fotos){ var cont=document.createElement('div'); t.appendChild(cont);
-        pintarFoto=function(){ window.Fotos.renderItem(cont,item,d,alCambiar,d.valor<CFG.umbralFoto); };
+        pintarFoto=function(){ window.Fotos.renderItem(cont,item,d,alCambiar,true); };
         pintarFoto(); }
     }
     var naFila=document.createElement('label'); naFila.className='na-fila';

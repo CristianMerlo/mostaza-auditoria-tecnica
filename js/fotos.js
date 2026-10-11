@@ -2,6 +2,7 @@ window.Fotos=(function(){
   'use strict';
   var CFG=window.CONFIG.fotos;
   function maxItem(item){
+    if(item&&item.fotosMax)return item.fotosMax;
     if(item&&window.Checklist.bloqueDe(item.id)==='edilicio')return CFG.maxPorItemEdilicio||CFG.maxPorItem;
     return CFG.maxPorItem; }
   function nuevoId(){return 'f-'+Date.now()+'-'+Math.random().toString(36).slice(2,7);}
@@ -60,7 +61,8 @@ window.Fotos=(function(){
       wrap.appendChild(img);wrap.appendChild(q);fila.appendChild(wrap);
     });
     cont.appendChild(fila);
-    var critico=(typeof d.valor==='number' && d.valor<window.CONFIG.umbralFotoObligatoria && !d.na);
+    var punt=(typeof d.valor==='number')?d.valor:window.Scoring.puntajeItem(item,d);
+    var critico=(typeof punt==='number' && punt<window.CONFIG.umbralFotoObligatoria && !d.na);
     if(critico && (d.fotos||[]).length<window.CONFIG.fotosMinObligatorias){
       var w=document.createElement('p');w.className='error';
       w.textContent='Puntaje crítico: sacá al menos 1 foto para documentar el problema.';

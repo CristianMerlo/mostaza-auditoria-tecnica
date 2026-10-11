@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Prototipo · Bloque Cocina</title>
+<style>
+:root{--marca:#B71C1C;--tinta:#212121;--label:#8a8a8a;--borde:#e3e3e3;
+  --ok:#43A047;--leve:#F9A825;--grave:#E53935;--na:#9E9E9E}
+*{box-sizing:border-box}
+body{font-family:system-ui,-apple-system,sans-serif;background:#f4f4f4;margin:0;padding:14px;color:var(--tinta)}
+.cab{text-align:center;margin-bottom:12px}
+.cab h1{font-size:17px;margin:0}
+.cab p{font-size:12px;color:var(--label);margin:2px 0}
+.aviso{background:#FFF8E1;border:1px solid #FFE082;border-radius:10px;padding:8px 10px;font-size:12px;margin-bottom:12px}
+.tarjeta{background:#fff;border:1px solid var(--borde);border-left:5px solid var(--marca);border-radius:12px;
+  padding:12px;margin-bottom:10px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.cabecera{display:flex;justify-content:space-between;align-items:center}
+.cabecera h2{font-size:15px;margin:0}
+.puntaje{font-weight:900;font-size:18px}
+.p-ok{color:var(--ok)}.p-leve{color:#B08900}.p-grave{color:var(--grave)}.p-na{color:var(--na)}
+.btn{display:block;width:100%;min-height:46px;margin-top:10px;border:2px solid var(--borde);border-radius:10px;
+  background:#fff;font-weight:800;font-size:14px;cursor:pointer}
+.btn--principal{background:var(--marca);border-color:var(--marca);color:#fff}
+.punto{padding:10px 0;border-bottom:1px dashed #eee}
+.punto:last-child{border-bottom:none}
+.punto__fila{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.punto__nombre{font-size:13.5px;font-weight:700;flex:1;min-width:130px}
+.chips{display:flex;gap:5px}
+.chip{border:1.5px solid var(--borde);background:#fafafa;border-radius:20px;padding:7px 11px;
+  font-size:12px;font-weight:800;cursor:pointer;color:#666}
+.chip--on[data-e="OK"]{background:var(--ok);border-color:var(--ok);color:#fff}
+.chip--on[data-e="LEVE"]{background:var(--leve);border-color:var(--leve);color:#3a2f00}
+.chip--on[data-e="GRAVE"]{background:var(--grave);border-color:var(--grave);color:#fff}
+.chip--on[data-e="NA"]{background:var(--na);border-color:var(--na);color:#fff}
+.detalle{margin-top:8px}
+.detalle textarea{width:100%;border:1.5px solid var(--borde);border-radius:10px;padding:8px;font-size:13px;min-height:44px}
+.fotos{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.foto{position:relative;width:64px;height:64px;border-radius:8px;overflow:hidden;border:1px solid var(--borde)}
+.foto img{width:100%;height:100%;object-fit:cover}
+.foto button{position:absolute;top:1px;right:1px;border:none;background:rgba(0,0,0,.55);color:#fff;
+  border-radius:50%;width:20px;height:20px;font-size:12px;line-height:1;cursor:pointer}
+.addfoto{width:64px;height:64px;border:2px dashed #bbb;border-radius:8px;display:flex;align-items:center;
+  justify-content:center;font-size:22px;color:#999;cursor:pointer;background:#fafafa}
+.bloqueado .chip{pointer-events:none;opacity:.75}
+.bloqueado textarea{pointer-events:none;opacity:.75}
+.vista{background:#fff;border:1px solid var(--borde);border-radius:12px;padding:12px;margin-top:14px;font-size:12.5px;white-space:pre-wrap}
+.vista h3{margin:0 0 6px;font-size:13px}
+</style>
+</head>
+<body>
+<div class="cab">
+  <h1>🍳 MOSTAZA · Bloque Cocina (prototipo)</h1>
+  <p>Prototipo aislado — no toca la auditoría real · V0.1</p>
+</div>
+<div class="aviso">Probá el flujo: toca el estado de cada punto (un toque, sin deslizar), agregá observación/fotos si hay novedad, y cerrá el bloque con el candado único. El puntaje general se calcula solo.</div>
+
+<div class="tarjeta" id="bloque">
+  <div class="cabecera">
+    <h2>Cocina — inspección completa</h2>
+    <span class="puntaje p-ok" id="score">100</span>
+  </div>
+  <div id="puntos"></div>
+  <div class="fotos" id="fotos"></div>
+  <button class="btn" id="btnFoto" type="button">📷 Agregar foto al bloque (máx. 8)</button>
+  <input type="file" id="inputFoto" accept="image/*" capture="environment" hidden multiple>
+  <button class="btn btn--principal" id="btnCandado" type="button">🔓 Cerrar bloque (ya revisé todo)</button>
+</div>
+
+<div class="vista"><h3>Vista previa de lo que iría al PDF:</h3><span id="preview"></span></div>
+
+<script>
+'use strict';
+var PUNTOS=[
+  {k:'pisos',n:'Pisos, rejillas y desagües'},
+  {k:'paredes',n:'Paredes, azulejos y revestimientos'},
+  {k:'cielo',n:'Cielorraso y techos'},
+  {k:'aire',n:'Salidas de aire / ventilación'},
+  {k:'luz',n:'Iluminación y tomas de servicio'},
+  {k:'herme',n:'Hermeticidad y limpieza general'}
+];
+var VALOR={OK:100,LEVE:75,GRAVE:40,NA:null};
+var MAX_FOTOS=8;
+var estado={cerrado:false,puntos:{},fotos:[]};
+PUNTOS.forEach(function(p){estado.puntos[p.k]={e:'OK',obs:''};});
+
+function guardar(){try{localStorage.setItem('proto_bloque_cocina',JSON.stringify(estado));}catch(e){}}
+function recuperar(){try{var d=JSON.parse(localStorage.getItem('proto_bloque_cocina'));
+  if(d&&d.puntos)estado=d;}catch(e){}}
+
+function promedio(){var vals=PUNTOS.map(function(p){var e=estado.puntos[p.k].e;return VALOR[e];})
+  .filter(function(v){return v!=null;});
+  return vals.length?Math.round(vals.reduce(function(a,b){return a+b;},0)/vals.length):100;}
+
+function claseScore(s){return s>=80?'p-ok':s>=60?'p-leve':'p-grave';}
+
+function render(){
+  var cont=document.getElementById('puntos');cont.innerHTML='';
+  PUNTOS.forEach(function(p){
+    var d=estado.puntos[p.k];
+    var row=document.createElement('div');row.className='punto';
+    var fila=document.createElement('div');fila.className='punto__fila';
+    var nom=document.createElement('span');nom.className='punto__nombre';nom.textContent=p.n;
+    var chips=document.createElement('div');chips.className='chips';
+    ['OK','LEVE','GRAVE','NA'].forEach(function(e){
+      var c=document.createElement('button');c.type='button';c.className='chip'+(d.e===e?' chip--on':'');
+      c.dataset.e=e;c.textContent=e==='NA'?'N/A':e;
+      c.addEventListener('click',function(){estado.puntos[p.k].e=e;guardar();render();});
+      chips.appendChild(c);});
+    fila.appendChild(nom);fila.appendChild(chips);row.appendChild(fila);
+    if(d.e==='LEVE'||d.e==='GRAVE'){
+      var det=document.createElement('div');det.className='detalle';
+      var ta=document.createElement('textarea');ta.placeholder='Qué pasa con '+p.n.toLowerCase()+' (opcional)';
+      ta.value=d.obs;ta.addEventListener('input',function(){d.obs=ta.value;guardar();pintarPreview();});
+      det.appendChild(ta);row.appendChild(det);}
+    cont.appendChild(row);});
+  var s=promedio();var el=document.getElementById('score');
+  el.textContent=s;el.className='puntaje '+claseScore(s);
+  document.getElementById('bloque').classList.toggle('bloqueado',estado.cerrado);
+  document.getElementById('btnCandado').textContent=estado.cerrado?'🔒 Bloque cerrado — tocar para reabrir':'🔓 Cerrar bloque (ya revisé todo)';
+  document.getElementById('btnFoto').style.display=estado.fotos.length>=MAX_FOTOS?'none':'block';
+  pintarFotos();pintarPreview();
+}
+
+function pintarFotos(){var cont=document.getElementById('fotos');cont.innerHTML='';
+  estado.fotos.forEach(function(f,i){
+    var w=document.createElement('div');w.className='foto';
+    var img=document.createElement('img');img.src=f;w.appendChild(img);
+    var q=document.createElement('button');q.textContent='✕';
+    q.addEventListener('click',function(){estado.fotos.splice(i,1);guardar();render();});
+    w.appendChild(q);cont.appendChild(w);});}
+
+function pintarPreview(){
+  var lineas=['Cocina: estado general — '+promedio()+'/100 ('+(estado.cerrado?'bloque cerrado':'en revisión')+')'];
+  PUNTOS.forEach(function(p){var d=estado.puntos[p.k];
+    if(d.e==='OK')return;
+    if(d.e==='NA'){lineas.push('· '+p.n+': NO APLICA');return;}
+    lineas.push('· '+p.n+': '+d.e+(d.obs.trim()?' — '+d.obs.trim():''));});
+  lineas.push('Fotos del bloque: '+estado.fotos.length+' de '+MAX_FOTOS);
+  document.getElementById('preview').textContent=lineas.join('\n');}
+
+document.getElementById('btnCandado').addEventListener('click',function(){
+  estado.cerrado=!estado.cerrado;guardar();render();});
+document.getElementById('btnFoto').addEventListener('click',function(){
+  document.getElementById('inputFoto').click();});
+document.getElementById('inputFoto').addEventListener('change',function(ev){
+  var fs=Array.prototype.slice.call(ev.target.files||[]);
+  var falta=MAX_FOTOS-estado.fotos.length;
+  fs.slice(0,falta).forEach(function(f){
+    var r=new FileReader();r.onload=function(){
+      var img=new Image();img.onload=function(){
+        var escala=Math.min(1,900/Math.max(img.width,img.height));
+        var c=document.createElement('canvas');c.width=img.width*escala;c.height=img.height*escala;
+        c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+        estado.fotos.push(c.toDataURL('image/jpeg',0.6));guardar();render();};
+      img.src=r.result;};
+    r.readAsDataURL(f);});
+  ev.target.value='';});
+
+recuperar();render();
+</script>
+</body>
+</html>

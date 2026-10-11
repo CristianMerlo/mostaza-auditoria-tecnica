@@ -15,10 +15,11 @@
     cont.appendChild(t);
     var r=document.createElement('div');r.className='tarjeta';r.appendChild(etq('Repaso antes de firmar el informe'));
     var bajos=[],naArr=[],sinTocar=[];
-    window.Checklist.todos().forEach(function(it){ if(it.tipo==='agua')return;
+    window.Checklist.todos().forEach(function(it){ if(it.tipo==='agua'||it.tipo==='texto')return;
       var d=v.items[it.id];if(!d)return;
+      var p=window.Scoring.puntajeItem(it,d);
       if(d.na)naArr.push(it.nombre);
-      else if(typeof d.valor==='number'&&d.valor<window.CONFIG.umbralFoto)bajos.push(it.nombre+' ('+d.valor+')');
+      else if(typeof p==='number'&&p<window.CONFIG.umbralFoto)bajos.push(it.nombre+' ('+p+')');
       else if(!d.tocado)sinTocar.push(it.nombre);});
     r.appendChild(lista('Ítems por debajo de 70',bajos,'var(--c-rojo)'));
     r.appendChild(lista('No aplica',naArr,'var(--c-sin-medir)'));
