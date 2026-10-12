@@ -72,6 +72,13 @@ body{min-height:100vh;padding-top:var(--alto-cabecera);
 .pie__version{min-height:44px;min-width:72px;padding:8px 12px;border:1px solid var(--c-borde);
   border-radius:var(--radio);background:var(--c-superficie);color:var(--c-label);
   font:inherit;font-weight:900;cursor:pointer;touch-action:manipulation}
+/* PWA: acceso a la instalación desde el pie, con el mismo peso visual que la versión */
+.pie__instalar{min-height:44px;padding:8px 12px;border:1px solid var(--c-marca);
+  border-radius:var(--radio);background:var(--c-superficie);color:var(--c-marca);
+  font:inherit;font-weight:900;cursor:pointer;touch-action:manipulation}
+.pie__instalar:active{background:rgba(211,47,47,.08)}
+.pasos-instalar{margin:0 0 10px;padding-left:20px;font-size:13px;line-height:1.6;color:var(--c-texto)}
+.pasos-instalar li{margin-bottom:4px}
 .modal{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.55);display:flex;
   align-items:flex-end;justify-content:center;padding:12px}
 .modal--oculto{display:none}
@@ -121,6 +128,10 @@ textarea.campo{min-height:72px;resize:vertical}
 .chip--on[data-e="GRAVE"]{background:#E53935;border-color:#B71C1C;color:#fff}
 .chip--on[data-e="NA"]{background:#9E9E9E;border-color:#616161;color:#fff}
 .item__ayuda{font-size:11px;color:var(--c-label);margin:0 0 6px}
+/* V2.6.2: recordatorio de dato obligatorio. No bloquea el avance, sólo avisa.
+   Fondo propio: se ve igual con la paleta clara y con la oscura. */
+.aviso-dato{font-size:12px;font-weight:700;margin:6px 0 0;padding:6px 8px;border-radius:6px;
+  color:#3d2c00;background:var(--c-amarillo);border-left:3px solid var(--c-naranja)}
 .na-fila{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:13px;font-weight:700}
 .na-fila input{width:22px;height:22px}
 .chk{display:flex;align-items:center;gap:10px;min-height:44px;font-size:14px;font-weight:700;

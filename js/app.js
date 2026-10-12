@@ -5,6 +5,7 @@
     window.Visita.engancharFlush();
     window.Paleta.listo().then(function(){window.Paleta.todo();avisarGuardado();});
     window.Almacen.iniciar();
+    if(window.PWA)window.PWA.iniciar();   // instalación en el teléfono + Service Worker
     var b=window.Visita.borrador();
     if(b)preguntarBorrador(b); else window.UI.render();
   }

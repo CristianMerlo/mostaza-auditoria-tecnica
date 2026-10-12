@@ -5,8 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#B71C1C">
+<!-- PWA: ícono e instalación en el teléfono (manifest.json + sw.js + js/pwa.js) -->
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="img/icon-192.png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Auditoría">
 <title>Auditoría Técnica · Mostaza</title>
-<script>window.VT_VERSION = '2.5.0';</script>
+<script>window.VT_VERSION = '2.6.2';</script>
 <style>
 /* CSS critico inline: se aplica en el primer render, antes de descargar app.css.
    Evita el flash blanco/negro (FOUC) mientras carga la hoja de estilos real. */
@@ -49,6 +57,7 @@ html.vt-listo body>*{opacity:1;transition:opacity .2s ease-out}
     'js/paneles/identificacion.js', 'js/paneles/local.js', 'js/paneles/recorrido.js',
     'js/paneles/firmas.js', 'js/paneles/informe.js',
     'vendor/jspdf.umd.min.js',
+    'js/pwa.js',
     'js/app.js'
   ];
   archivos.forEach(function (src) {

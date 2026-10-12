@@ -35,8 +35,20 @@
       t.appendChild(ay);
       var obs=document.createElement('textarea'); obs.className='campo'; obs.placeholder='Qué hay que mejorar (opcional)';
       obs.value=d.obs||''; obs.readOnly=!abierto; obs.style.opacity=abierto?'1':'0.6';
-      obs.addEventListener('input',function(){ if(obs.readOnly)return; d.obs=obs.value; alCambiar(d,{}); });
+      /* V2.6.2 (Cristian 12/10): estos ítems piden un dato concreto (fecha de certificado,
+         vencimiento de matzá). Con el recorrido libre no se bloquea el avance; sólo se
+         recuerda que sin ese dato el informe queda incompleto. */
+      var avisoDato=null;
+      if(item.requiereObs){
+        avisoDato=document.createElement('p'); avisoDato.className='aviso-dato';
+        avisoDato.textContent='Falta el dato obligatorio: escribí la fecha o el vencimiento (lo pide el informe).';
+        if(String(d.obs||'').trim())avisoDato.style.display='none';
+      }
+      obs.addEventListener('input',function(){ if(obs.readOnly)return; d.obs=obs.value;
+        if(avisoDato)avisoDato.style.display=String(obs.value||'').trim()?'none':'';
+        alCambiar(d,{}); });
       t.appendChild(obs);
+      if(avisoDato)t.appendChild(avisoDato);
       if(item.fotos){ var cont=document.createElement('div'); t.appendChild(cont);
         pintarFoto=function(){ window.Fotos.renderItem(cont,item,d,alCambiar,true); };
         pintarFoto(); }
@@ -50,7 +62,7 @@
       mot.placeholder='Motivo (obligatorio): por qué no aplica'; mot.value=d.motivoNa||'';
       mot.addEventListener('input',function(){d.motivoNa=mot.value;alCambiar(d,{});}); t.appendChild(mot);
       if(!String(d.motivoNa||'').trim()){var e=document.createElement('p');e.className='error';
-        e.textContent='Escribí el motivo para poder avanzar.';t.appendChild(e);} }
+        e.textContent='Escribí el motivo: sin eso el informe no explica por qué no aplica.';t.appendChild(e);} }
     return t;
   }
   function puntaje(d){ if(d.na)return null; return typeof d.valor==='number'?d.valor:null; }
