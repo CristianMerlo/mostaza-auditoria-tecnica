@@ -1,99 +1,91 @@
-# DEPLOY-SURGE — Cómo actualizar el sitio en vivo (surge)
+# PUBLICACIÓN — dónde vive cada versión
 
-> Procedimiento para publicar la última versión de la app en
-> **https://visita-tecnica-mostaza.surge.sh/**
-> Pensado para pasarle el bloque directo al harness cuando quieras actualizar.
-
----
-
-## 1. Lo primero que hay que entender
-
-**El sitio en surge es PERMANENTE.** No depende de la terminal ni de que la Mac
-esté prendida. Cuando corrés `surge`, los archivos se **suben a los servidores de
-surge** (una CDN en la nube). Podés cerrar la terminal, apagar la compu o irte:
-el sitio sigue online.
-
-Consecuencia importante:
-
-- Surge publica una **foto congelada** del contenido de la carpeta en el momento
-  del deploy. **No está conectado a tu carpeta ni a GitHub.**
-- Si el harness edita archivos en `~/visita-tecnica/` DESPUÉS del deploy, el
-  sitio en vivo **NO se actualiza solo**. Hay que **volver a correr el comando de
-  deploy** para subir los cambios nuevos.
-
-Regla de oro: **cada cambio de código = re-deploy de surge.**
-
-| Cosa | ¿Se cae al cerrar la terminal? | ¿Se actualiza sola? |
-|------|--------------------------------|---------------------|
-| Surge (`.surge.sh`)              | No, es permanente | No, hay que re-deployar |
-| Servidor local (`http.server`)   | Sí, se muere      | N/A |
+> **Producción (lo que usan los jefes y técnicos):**
+> **https://cristianmerlo.github.io/mostaza-auditoria-tecnica/**
+>
+> **Pruebas (sólo desarrollo):** `https://auditoria-tecnica-v22.surge.sh/`
+>
+> Los dominios `.surge.sh` **nunca** fueron el link de los jefes: son banco de
+> pruebas. La regla es que **GitHub Pages siempre tenga la última versión**.
 
 ---
 
-## 2. Procedimiento de actualización (el que le pasás al harness)
+## 1. Los dos canales
 
-### Bloque para el harness
+| Canal | Link | Para qué | ¿Se actualiza solo? |
+|-------|------|----------|---------------------|
+| **GitHub Pages** | `cristianmerlo.github.io/mostaza-auditoria-tecnica` | **Producción**, el link que se reparte | **Sí**: al pushear a `main` se regenera solo (~1 min) |
+| **Surge** | `auditoria-tecnica-v22.surge.sh` | Probar cambios antes de aprobarlos | No: hay que re-deployar |
+
+Consecuencia práctica: **publicar = pushear a `main`**. Si el código está
+commiteado y pusheado, la versión de producción ya está servida. Si está sólo en
+Surge, existe únicamente para vos.
+
+> `visita-tecnica-mostaza.surge.sh` es un dominio **viejo y congelado** (quedó en
+> V2.1.0). Pertenece a otra cuenta de Surge y no hay credenciales en esta máquina,
+> así que no se puede ni se debe actualizar. No lo repartir.
+
+---
+
+## 2. Flujo de una versión nueva
+
+1. Se edita el código y se despliega en el dominio de **pruebas**:
+   ```bash
+   ~/.hermes/node/bin/surge --project . --domain auditoria-tecnica-v22.surge.sh
+   ```
+   (las credenciales de la cuenta están en `~/.netrc`; surge genera un archivo
+   `CNAME` en el directorio que **no** se commitea)
+2. Se prueba en el teléfono contra ese link.
+3. Con el OK, se commitea y se pushea a `main` → **GitHub Pages queda actualizado**.
+4. Se verifica la publicación (sección 3).
+
+---
+
+## 3. Verificar que producción tomó la versión
 
 ```bash
-cd ~/visita-tecnica && surge . visita-tecnica-mostaza.surge.sh
+curl -s https://cristianmerlo.github.io/mostaza-auditoria-tecnica/index.html | grep VT_VERSION
 ```
 
-Eso es todo. `surge` sube el contenido actual de `~/visita-tecnica/` al dominio
-`visita-tecnica-mostaza.surge.sh`, sobrescribiendo la versión anterior.
+Tiene que mostrar el `VT_VERSION` recién pusheado. Si sale la versión vieja,
+esperar un minuto y volver a consultar (el build de Pages es asíncrono).
 
-### Qué esperar como salida
+En el teléfono:
 
-Al terminar bien, surge muestra algo como:
-
-```
-   Success! - Published to visita-tecnica-mostaza.surge.sh
-```
-
-Si sale eso, el sitio ya está actualizado. Abrí el link en el teléfono para
-confirmar (ver sección 4).
+- Si se ve contenido viejo, **cerrar la pestaña y reabrir el link** (la app es una
+  SPA: una pestaña abierta hace tiempo sigue corriendo el código anterior).
+- Desde V2.6.2 hay **Service Worker**: la app busca versión nueva al abrirla, al
+  volver de otra pestaña y cada 5 minutos, y se recarga sola cuando encuentra una.
+  Por eso producción puede actualizarse sin que el técnico haga nada.
+- El número de versión del pie de página abre el panel de **Diagnóstico**, donde se
+  ve la versión, el estado de la visita y si el PDF fue generado.
 
 ---
 
-## 3. Orden correcto de los pasos cuando hay cambios de código
+## 4. App instalable
 
-1. **Harness** aplica los bloques `cat > ...` que te pasó Kiro (escribe en
-   `~/visita-tecnica/`).
-2. **Harness** re-deploya surge con el bloque de la sección 2.
-3. **Vos** probás en el teléfono contra el link en vivo.
-4. **Antigravity** commitea/pushea a GitHub (esto es INDEPENDIENTE de surge:
-   GitHub y surge no se sincronizan entre sí, cada uno se actualiza por su lado).
+El link de producción es el que hay que instalar en el teléfono (botón
+**"Instalar app"** en el pie, o menú del navegador → *Instalar aplicación*; en
+iPhone: Compartir → *Agregar a pantalla de inicio*).
 
-> Surge = para probar en vivo ya. GitHub = para versionar/respaldar. Son dos
-> destinos distintos del mismo código; hay que actualizar ambos.
-
----
-
-## 4. Cómo verificar que el deploy tomó los cambios
-
-1. Abrí **https://visita-tecnica-mostaza.surge.sh/** en el teléfono.
-2. Si ves contenido viejo: **forzá recarga** (el navegador cachea). En el
-   celular, cerrá la pestaña y volvé a abrir el link, o usá una pestaña de
-   incógnito.
-3. Tocá el **número de versión en el pie de página** para abrir el panel de
-   Diagnóstico y confirmar que la versión y los assets coinciden con lo esperado.
+En iPhone la app instalada tiene **almacenamiento separado** al del navegador: el
+borrador de una visita que se empezó en Safari no aparece en la app instalada. Se
+usa siempre el mismo camino.
 
 ---
 
 ## 5. Problemas comunes
 
-- **"command not found: surge"** → falta instalar surge en la Mac una sola vez:
-  `npm install -g surge`. Requiere Node/npm.
-- **Pide login (email/password)** → la primera vez surge pide crear/entrar a una
-  cuenta. Una vez logueado, no lo vuelve a pedir en esa máquina.
-- **El sitio no cambió** → casi siempre es caché del navegador (ver sección 4) o
-  que se corrió `surge` desde la carpeta equivocada. Confirmá que estás en
-  `~/visita-tecnica/` (ahí tiene que estar el `index.html`).
-- **"Aborted" / dominio ocupado** → el dominio `.surge.sh` es de esta cuenta;
-  mientras uses la misma cuenta, podés re-publicar sin problema.
+- **"Aborted - you do not have permission to publish to ..."** → ese dominio
+  `.surge.sh` es de otra cuenta. `surge list` muestra los dominios de la cuenta
+  configurada.
+- **"command not found: surge"** → `npm install -g surge` una sola vez.
+- **Pages no cambia** → confirmar el push (`git ls-remote origin -h refs/heads/main`
+  tiene que dar el hash del commit nuevo) y reintentar el `curl` de la sección 3.
 
 ---
 
 ## 6. Resumen de una línea
 
-Para actualizar el sitio en vivo, el harness corre:
-`cd ~/visita-tecnica && surge . visita-tecnica-mostaza.surge.sh`
+Producción es GitHub Pages y se actualiza **pusheando a `main`**; Surge es sólo
+para probar antes de subir.

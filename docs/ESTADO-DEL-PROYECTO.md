@@ -3,7 +3,9 @@
 > Documento de traspaso entre hilos de Kiro. Si sos un nuevo hilo retomando este
 > proyecto: leé esto completo antes de tocar nada. Al final está el punto exacto
 > donde quedamos y lo que falta.
-> Última actualización: cierre de sesión con la app funcional en producción (surge).
+> Última actualización: cierre de sesión con la app funcional. OJO: la producción
+> es **GitHub Pages** (<https://cristianmerlo.github.io/mostaza-auditoria-tecnica/>);
+> los dominios de Surge son sólo banco de pruebas.
 
 ---
 
@@ -23,7 +25,11 @@ todo, formularios largos). Criterio de desempate en UX: **menos fricción**.
 
 - **HTML + CSS + JavaScript vanilla.** Sin framework, sin bundler, sin paso de
   build, sin backend.
-- **Sin Service Worker ni PWA** en esta versión (rompió en producción antes).
+- **App instalable (PWA)** desde V2.6.2: `manifest.json` + `sw.js` (navegación
+  network-first, assets stale-while-revalidate, recarga automática al detectar
+  versión nueva) y `js/pwa.js` con el botón "Instalar app". En versiones anteriores
+  no había Service Worker porque una versión vieja rompió la actualización; el
+  diseño actual se probó offline y de actualización en caliente antes de publicar.
 - **jsPDF vendorizado** en `vendor/jspdf.umd.min.js` (v4.2.1). Cero CDN, cero
   pedidos a internet en runtime (la app corre con el teléfono en modo avión una
   vez cargada). Excepción tolerada: el link a Google Maps del PDF (se abre
@@ -69,12 +75,15 @@ Hay tres entornos y NO comparten disco:
   para no trabajar sobre una versión vieja de memoria.
 - **Verificá los tamaños en bytes** después de cada commit contra la API de
   GitHub (`/contents/...?ref=main`). Confirmá que el SHA cambió.
-- Harness prueba en **surge**: `cd ~/visita-tecnica && surge . visita-tecnica-mostaza.surge.sh`
+- Banco de pruebas en **surge** (sólo para probar, no es el link de los jefes):
+  `~/.hermes/node/bin/surge --project . --domain auditoria-tecnica-v22.surge.sh`
   (surge es PERMANENTE, no depende de la terminal; hay que RE-DEPLOYAR en cada
-  cambio porque publica una foto congelada. Procedimiento completo en
-  `docs/DEPLOY-SURGE.md`.)
-- La app en vivo: **https://visita-tecnica-mostaza.surge.sh/**
-- GitHub Pages: pendiente, se hará al final (ver sección 7).
+  cambio porque publica una foto congelada. El `CNAME` que genera no se commitea.)
+- **Producción / link que se reparte: https://cristianmerlo.github.io/mostaza-auditoria-tecnica/**
+  Se actualiza **solo al pushear a `main`** (tarda ~1 min). Ver detalle en
+  `docs/DEPLOY-SURGE.md`.
+- `visita-tecnica-mostaza.surge.sh`: dominio viejo, congelado en V2.1.0 y de otra
+  cuenta de Surge. No se actualiza ni se reparte.
 
 ---
 
@@ -116,7 +125,7 @@ js/paneles/informe.js      Paso 6: repaso + confirmacion anti-Frogmi + generar P
 js/app.js                  Arranque, cableado, dialogo de "visita en curso".
 docs/esquema-visita.md     Esquema del objeto visita (referencia).
 docs/ESTADO-DEL-PROYECTO.md Este archivo.
-docs/DEPLOY-SURGE.md       Procedimiento para actualizar el sitio en vivo (surge).
+docs/DEPLOY-SURGE.md       Dónde se publica cada versión (Pages = producción).
 ```
 
 Orden de carga de scripts: ver `index.html`. Datos y cascaron antes que paneles
@@ -243,7 +252,7 @@ Orden de carga de scripts: ver `index.html`. Datos y cascaron antes que paneles
 ---
 
 ## 9. Cómo verificar rápido que todo está sano (para un hilo nuevo)
-1. Abrir https://visita-tecnica-mostaza.surge.sh/ o leer el repo.
+1. Abrir https://cristianmerlo.github.io/mostaza-auditoria-tecnica/ (producción) o leer el repo.
 2. Tocar la versión en el pie -> panel Diagnóstico: "Coinciden pie y constante:
    SÍ", "Assets con ?v= correcto: N de N".
 3. Recorrido completo: identificación (PIN) -> local -> cocina -> edilicio ->
